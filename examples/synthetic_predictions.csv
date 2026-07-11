@@ -1,0 +1,61 @@
+case_number,case_id,subject,llm_product_area,llm_feature_workflow,llm_issue_type,llm_flag
+SYN-001,synthetic-001,Move employee to another location,Staff Management,Staff / Site Transfer,Transfer Request,FALSE
+SYN-002,synthetic-002,User locked out after password reset,Login / Access,Password Reset & Lockout,Unexpected Behavior,FALSE
+SYN-003,synthetic-003,Published schedule is not visible,Scheduling,Schedule Visibility,Other,FALSE
+SYN-004,synthetic-004,Question about invoice charges,Reports,Billing & Payments,Change Request,FALSE
+SYN-005,synthetic-005,Unusual account administration question,Billing & Subscription,Other,How-To / Question,FALSE
+SYN-006,synthetic-006,Grant manager permissions,Staff Management,Permission & Access Grant,Access Request,FALSE
+SYN-007,synthetic-007,Activation email was not received,Login / Access,Account Activation,Billing Inquiry,FALSE
+SYN-008,synthetic-008,Employee cannot release a shift,Scheduling,Shift Trade / Release,Transfer Request,FALSE
+SYN-009,synthetic-009,How to export a report,Reports,Report Building,Unexpected Behavior,FALSE
+SYN-010,synthetic-010,Move employee to another location,Billing & Subscription,Staff / Site Transfer,Other,FALSE
+SYN-011,synthetic-011,User locked out after password reset,Staff Management,Password Reset & Lockout,Change Request,FALSE
+SYN-012,synthetic-012,Published schedule is not visible,Login / Access,Schedule Visibility,How-To / Question,FALSE
+SYN-013,synthetic-013,Question about invoice charges,Scheduling,Billing & Payments,Access Request,FALSE
+SYN-014,synthetic-014,Unusual account administration question,Reports,Other,Billing Inquiry,FALSE
+SYN-015,synthetic-015,Grant manager permissions,Billing & Subscription,Permission & Access Grant,Transfer Request,FALSE
+SYN-016,synthetic-016,Activation email was not received,Staff Management,Account Activation,Unexpected Behavior,FALSE
+SYN-017,synthetic-017,Employee cannot release a shift,Login / Access,Shift Trade / Release,Other,FALSE
+SYN-018,synthetic-018,How to export a report,Scheduling,Report Building,Change Request,FALSE
+SYN-019,synthetic-019,Move employee to another location,Reports,Staff / Site Transfer,How-To / Question,FALSE
+SYN-020,synthetic-020,User locked out after password reset,Billing & Subscription,Password Reset & Lockout,Access Request,FALSE
+SYN-021,synthetic-021,Published schedule is not visible,Staff Management,Schedule Visibility,How-To / Question,FALSE
+SYN-022,synthetic-022,Question about invoice charges,Login / Access,Billing & Payments,Access Request,FALSE
+SYN-023,synthetic-023,Unusual account administration question,Scheduling,Other,Billing Inquiry,FALSE
+SYN-024,synthetic-024,Grant manager permissions,Reports,Permission & Access Grant,Transfer Request,FALSE
+SYN-025,synthetic-025,Activation email was not received,Billing & Subscription,Schedule Visibility,Change Request,FALSE
+SYN-026,synthetic-026,Employee cannot release a shift,Staff Management,Billing & Payments,How-To / Question,FALSE
+SYN-027,synthetic-027,How to export a report,Login / Access,Other,Access Request,FALSE
+SYN-028,synthetic-028,Move employee to another location,Scheduling,Permission & Access Grant,Billing Inquiry,FALSE
+SYN-029,synthetic-029,User locked out after password reset,Reports,Account Activation,Transfer Request,FALSE
+SYN-030,synthetic-030,Published schedule is not visible,Billing & Subscription,Shift Trade / Release,Unexpected Behavior,FALSE
+SYN-031,synthetic-031,Question about invoice charges,Staff Management,Report Building,Other,FALSE
+SYN-032,synthetic-032,Unusual account administration question,Login / Access,Staff / Site Transfer,Change Request,FALSE
+SYN-033,synthetic-033,Grant manager permissions,Scheduling,Password Reset & Lockout,How-To / Question,FALSE
+SYN-034,synthetic-034,Activation email was not received,Reports,Schedule Visibility,Access Request,FALSE
+SYN-035,synthetic-035,Employee cannot release a shift,Billing & Subscription,Billing & Payments,Billing Inquiry,FALSE
+SYN-036,synthetic-036,How to export a report,Staff Management,Other,Transfer Request,FALSE
+SYN-037,synthetic-037,Move employee to another location,Login / Access,Permission & Access Grant,Billing Inquiry,FALSE
+SYN-038,synthetic-038,User locked out after password reset,Scheduling,Account Activation,Transfer Request,FALSE
+SYN-039,synthetic-039,Published schedule is not visible,Reports,Shift Trade / Release,Unexpected Behavior,FALSE
+SYN-040,synthetic-040,Question about invoice charges,Billing & Subscription,Report Building,Other,FALSE
+SYN-041,synthetic-041,Unusual account administration question,Staff Management,Staff / Site Transfer,Change Request,FALSE
+SYN-042,synthetic-042,Grant manager permissions,Login / Access,Password Reset & Lockout,How-To / Question,FALSE
+SYN-043,synthetic-043,Activation email was not received,Scheduling,Schedule Visibility,Access Request,FALSE
+SYN-044,synthetic-044,Employee cannot release a shift,Reports,Billing & Payments,Billing Inquiry,FALSE
+SYN-045,synthetic-045,How to export a report,Billing & Subscription,Other,Transfer Request,FALSE
+SYN-046,synthetic-046,Move employee to another location,Login / Access,Staff / Site Transfer,Unexpected Behavior,FALSE
+SYN-047,synthetic-047,User locked out after password reset,Scheduling,Password Reset & Lockout,Other,FALSE
+SYN-048,synthetic-048,Published schedule is not visible,Reports,Schedule Visibility,Change Request,FALSE
+SYN-049,synthetic-049,Question about invoice charges,Billing & Subscription,Billing & Payments,How-To / Question,FALSE
+SYN-050,synthetic-050,Unusual account administration question,Staff Management,Other,Access Request,FALSE
+SYN-051,synthetic-051,Grant manager permissions,Login / Access,Permission & Access Grant,Billing Inquiry,FALSE
+SYN-052,synthetic-052,Activation email was not received,Scheduling,Account Activation,Transfer Request,FALSE
+SYN-053,synthetic-053,Employee cannot release a shift,Reports,Shift Trade / Release,Unexpected Behavior,FALSE
+SYN-054,synthetic-054,How to export a report,Billing & Subscription,Report Building,Other,FALSE
+SYN-055,synthetic-055,Move employee to another location,Staff Management,Staff / Site Transfer,Change Request,FALSE
+SYN-056,synthetic-056,User locked out after password reset,Login / Access,Password Reset & Lockout,How-To / Question,FALSE
+SYN-057,synthetic-057,Published schedule is not visible,Scheduling,Schedule Visibility,Access Request,FALSE
+SYN-058,synthetic-058,Question about invoice charges,Reports,Billing & Payments,Billing Inquiry,FALSE
+SYN-059,synthetic-059,Unusual account administration question,Billing & Subscription,Other,Transfer Request,FALSE
+SYN-060,synthetic-060,Grant manager permissions,Staff Management,Permission & Access Grant,Unexpected Behavior,FALSE

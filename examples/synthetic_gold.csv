@@ -1,0 +1,61 @@
+case_number,case_id,subject,review_status,human_product_area_l1,human_feature_workflow_l1,issue_type
+SYN-001,synthetic-001,Move employee to another location,Human_Reviewed,Staff Management,Staff / Site Transfer,Transfer Request
+SYN-002,synthetic-002,User locked out after password reset,Human_Reviewed,Login / Access,Password Reset & Lockout,Unexpected Behavior
+SYN-003,synthetic-003,Published schedule is not visible,Human_Reviewed,Scheduling,Schedule Visibility,Other
+SYN-004,synthetic-004,Question about invoice charges,Human_Reviewed,Reports,Billing & Payments,Change Request
+SYN-005,synthetic-005,Unusual account administration question,Human_Reviewed,Billing & Subscription,Other,How-To / Question
+SYN-006,synthetic-006,Grant manager permissions,Human_Reviewed,Staff Management,Permission & Access Grant,Access Request
+SYN-007,synthetic-007,Activation email was not received,Human_Reviewed,Login / Access,Account Activation,Billing Inquiry
+SYN-008,synthetic-008,Employee cannot release a shift,Human_Reviewed,Scheduling,Shift Trade / Release,Transfer Request
+SYN-009,synthetic-009,How to export a report,Human_Reviewed,Reports,Report Building,Unexpected Behavior
+SYN-010,synthetic-010,Move employee to another location,Human_Reviewed,Billing & Subscription,Staff / Site Transfer,Other
+SYN-011,synthetic-011,User locked out after password reset,Human_Reviewed,Staff Management,Password Reset & Lockout,Change Request
+SYN-012,synthetic-012,Published schedule is not visible,Human_Reviewed,Login / Access,Schedule Visibility,How-To / Question
+SYN-013,synthetic-013,Question about invoice charges,Human_Reviewed,Scheduling,Billing & Payments,Access Request
+SYN-014,synthetic-014,Unusual account administration question,Human_Reviewed,Reports,Other,Billing Inquiry
+SYN-015,synthetic-015,Grant manager permissions,Human_Reviewed,Billing & Subscription,Permission & Access Grant,Transfer Request
+SYN-016,synthetic-016,Activation email was not received,Human_Reviewed,Staff Management,Account Activation,Unexpected Behavior
+SYN-017,synthetic-017,Employee cannot release a shift,Human_Reviewed,Login / Access,Shift Trade / Release,Other
+SYN-018,synthetic-018,How to export a report,Human_Reviewed,Scheduling,Report Building,Change Request
+SYN-019,synthetic-019,Move employee to another location,Human_Reviewed,Reports,Staff / Site Transfer,How-To / Question
+SYN-020,synthetic-020,User locked out after password reset,Human_Reviewed,Billing & Subscription,Password Reset & Lockout,Access Request
+SYN-021,synthetic-021,Published schedule is not visible,Human_Reviewed,Staff Management,Schedule Visibility,Billing Inquiry
+SYN-022,synthetic-022,Question about invoice charges,Human_Reviewed,Login / Access,Billing & Payments,Transfer Request
+SYN-023,synthetic-023,Unusual account administration question,Human_Reviewed,Scheduling,Other,Unexpected Behavior
+SYN-024,synthetic-024,Grant manager permissions,Human_Reviewed,Reports,Permission & Access Grant,Other
+SYN-025,synthetic-025,Activation email was not received,Human_Reviewed,Billing & Subscription,Account Activation,Change Request
+SYN-026,synthetic-026,Employee cannot release a shift,Human_Reviewed,Staff Management,Shift Trade / Release,How-To / Question
+SYN-027,synthetic-027,How to export a report,Human_Reviewed,Login / Access,Report Building,Access Request
+SYN-028,synthetic-028,Move employee to another location,Human_Reviewed,Scheduling,Staff / Site Transfer,Billing Inquiry
+SYN-029,synthetic-029,User locked out after password reset,Human_Reviewed,Reports,Password Reset & Lockout,Transfer Request
+SYN-030,synthetic-030,Published schedule is not visible,Human_Reviewed,Billing & Subscription,Schedule Visibility,Unexpected Behavior
+SYN-031,synthetic-031,Question about invoice charges,Human_Reviewed,Staff Management,Billing & Payments,Other
+SYN-032,synthetic-032,Unusual account administration question,Human_Reviewed,Login / Access,Other,Change Request
+SYN-033,synthetic-033,Grant manager permissions,Human_Reviewed,Scheduling,Permission & Access Grant,How-To / Question
+SYN-034,synthetic-034,Activation email was not received,Human_Reviewed,Reports,Account Activation,Access Request
+SYN-035,synthetic-035,Employee cannot release a shift,Human_Reviewed,Billing & Subscription,Shift Trade / Release,Billing Inquiry
+SYN-036,synthetic-036,How to export a report,Human_Reviewed,Staff Management,Report Building,Transfer Request
+SYN-037,synthetic-037,Move employee to another location,Human_Reviewed,Login / Access,Staff / Site Transfer,Unexpected Behavior
+SYN-038,synthetic-038,User locked out after password reset,Human_Reviewed,Scheduling,Password Reset & Lockout,Other
+SYN-039,synthetic-039,Published schedule is not visible,Human_Reviewed,Reports,Schedule Visibility,Change Request
+SYN-040,synthetic-040,Question about invoice charges,Human_Reviewed,Billing & Subscription,Billing & Payments,How-To / Question
+SYN-041,synthetic-041,Unusual account administration question,Human_Reviewed,Staff Management,Other,Access Request
+SYN-042,synthetic-042,Grant manager permissions,Human_Reviewed,Login / Access,Permission & Access Grant,Billing Inquiry
+SYN-043,synthetic-043,Activation email was not received,Human_Reviewed,Scheduling,Account Activation,Transfer Request
+SYN-044,synthetic-044,Employee cannot release a shift,Human_Reviewed,Reports,Shift Trade / Release,Unexpected Behavior
+SYN-045,synthetic-045,How to export a report,Human_Reviewed,Billing & Subscription,Report Building,Other
+SYN-046,synthetic-046,Move employee to another location,Human_Reviewed,Staff Management,Staff / Site Transfer,Change Request
+SYN-047,synthetic-047,User locked out after password reset,Human_Reviewed,Login / Access,Password Reset & Lockout,How-To / Question
+SYN-048,synthetic-048,Published schedule is not visible,Human_Reviewed,Scheduling,Schedule Visibility,Access Request
+SYN-049,synthetic-049,Question about invoice charges,Human_Reviewed,Reports,Billing & Payments,Billing Inquiry
+SYN-050,synthetic-050,Unusual account administration question,Human_Reviewed,Billing & Subscription,Other,Transfer Request
+SYN-051,synthetic-051,Grant manager permissions,Human_Reviewed,Staff Management,Permission & Access Grant,Unexpected Behavior
+SYN-052,synthetic-052,Activation email was not received,Human_Reviewed,Login / Access,Account Activation,Other
+SYN-053,synthetic-053,Employee cannot release a shift,Human_Reviewed,Scheduling,Shift Trade / Release,Change Request
+SYN-054,synthetic-054,How to export a report,Human_Reviewed,Reports,Report Building,How-To / Question
+SYN-055,synthetic-055,Move employee to another location,Human_Reviewed,Billing & Subscription,Staff / Site Transfer,Access Request
+SYN-056,synthetic-056,User locked out after password reset,Human_Reviewed,Staff Management,Password Reset & Lockout,Billing Inquiry
+SYN-057,synthetic-057,Published schedule is not visible,Human_Reviewed,Login / Access,Schedule Visibility,Transfer Request
+SYN-058,synthetic-058,Question about invoice charges,Human_Reviewed,Scheduling,Billing & Payments,Unexpected Behavior
+SYN-059,synthetic-059,Unusual account administration question,Human_Reviewed,Reports,Other,Other
+SYN-060,synthetic-060,Grant manager permissions,Human_Reviewed,Billing & Subscription,Permission & Access Grant,Change Request

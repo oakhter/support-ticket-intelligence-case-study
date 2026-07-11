@@ -1,0 +1,27 @@
+======================================================
+SANITIZED THREE-FIELD BENCHMARK EXAMPLE
+======================================================
+
+Fields scored:
+  product_area
+  feature_workflow
+  issue_type
+
+Human/model mapping:
+  human_product_area_l1     ↔ llm_product_area
+  human_feature_workflow_l1 ↔ llm_feature_workflow
+  issue_type                ↔ llm_issue_type
+
+PRIVATE RUN RESULTS
+  product_area_accuracy          75.3%
+  feature_workflow_accuracy      64.5%
+  issue_type_accuracy            52.7%
+  aggregate_field_accuracy       64.2%
+  strict_exact_match_all_3       33.3%
+  distribution_overlap           81.0%
+
+Interpretation:
+  Field accuracy measures individual decisions across all three columns.
+  Strict exact match requires all three columns on a ticket to match.
+  Distribution overlap compares the overall category mix and is not
+  ticket-level accuracy.

@@ -1,0 +1,11 @@
+human_product_area_l1,human_feature_workflow_l1,issue_type
+Staff Management,Staff / Site Transfer,Transfer Request
+Login / Access,Permission & Access Grant,Access Request
+Scheduling,Password Reset & Lockout,Change Request
+Billing & Subscription,Account Activation,Unexpected Behavior
+Reports,Schedule Visibility,Billing Inquiry
+Mobile App,Shift Trade / Release,How-To / Question
+Integrations,Billing & Payments,Feature Request
+Insufficient Information,Report Building,Other
+,Other,
+,Insufficient Information,
