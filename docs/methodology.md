@@ -1,61 +1,159 @@
-# Methodology
+# Methodology — the full measurement story
 
-## Dataset and scope
+Numbers below are verified results from the private project; identifying details have been
+genericized. Synthetic files in this repository demonstrate structure and formulas only.
 
-The private analysis covered a two-month CRM export:
+## 1. Dataset and preparation
 
-- 854 raw records
-- 138 merged duplicates identified
-- 716 distinct cases
-- 701 cases containing usable classification text
+The analysis covered a two-month CRM export:
 
-No private ticket text is included in this repository.
+- **854 raw records**
+- **138 merged-case duplicates identified**
+- **716 distinct cases**
+- **701 cases with usable classification text**
 
-## Taxonomy discovery
+The public repository contains no production ticket text.
 
-Sentence embeddings and HDBSCAN were used to surface repeated themes. Clustering was treated as
-a discovery aid rather than a final classifier. A large unclustered tail supported a legitimate
-`Other` category rather than forcing every ticket into a named group.
+## 2. Taxonomy from clustering-assisted discovery
 
-The final measured model classified three dimensions:
+HDBSCAN over locally computed sentence embeddings grouped roughly 550 tickets into 31 semantic
+clusters, while a large share remained unclustered. That long tail was treated as evidence for a
+legitimate `Other` category rather than a reason to force every ticket into a named cluster.
 
-1. Product area
-2. Feature workflow
-3. Issue type
+Clusters plus expert review became a versioned taxonomy with:
 
-## Human benchmark
+- 24 product areas
+- 24 feature workflows
+- 14 issue types
 
-A seeded sample of 100 tickets was manually labeled using the same first-email input shown to the
-model. The benchmark measured agreement separately for all three fields.
+The private taxonomy file contained three sheets:
 
-## Metrics
+1. `taxonomy` — one column per classification field
+2. `decision_rules` — per-value adjudication guidance
+3. `synonyms` — approved terminology mappings
 
-### Aggregate field accuracy
+A preflight validator rejected duplicates, near-duplicate spellings, missing required columns,
+and dangling synonym targets. Decision rules rendered into the prompt so the labeling guide and
+model instructions came from the same source.
 
-Correct individual field assignments divided by all scored field assignments.
+## 3. Gold data
 
-### Strict exact match
+A seeded random sample of 100 tickets was manually labeled against the written rules using
+`first_email_only` input.
 
-The percentage of tickets where product area, feature workflow, and issue type all matched the human reviewer.
+Labeling conventions that mattered:
+
+- Label the customer’s stated problem, not support’s eventual action
+- Use `Other` for genuine one-offs rather than forcing the closest named category
+- Reserve `Insufficient Information` for cases that cannot be classified from the available
+  intake text
+- Do not adjudicate defect versus user error from a first email, because root cause is usually a
+  resolution fact
+
+## 4. Metrics
+
+### Per-field agreement
+
+The percentage of scored tickets where the model and reviewer selected the same label for one
+field.
+
+### Aggregate field agreement
+
+```text
+correct individual field assignments / all scored field assignments
+```
+
+With three fields, 93 scored rows produced 279 individual decisions.
+
+### Strict all-three match
+
+A ticket counted as correct only when product area, feature workflow, and issue type all matched
+the human labels.
 
 ### Distribution overlap
 
-For every field and label, the smaller of the human and model counts was summed and divided by the human-label total. This measures similarity of the overall category mix, not ticket-level
-correctness.
+For each field and label:
 
-## Measured outcome
+```text
+sum(min(human_count, model_count)) / total human labels
+```
 
-The validated combined-call format produced:
+This measures whether the overall category mix is similar. It does not establish that the correct
+label was attached to the correct ticket.
 
-- Product area: 75.3%
-- Feature workflow: 64.5%
-- Issue type: 52.7%
-- Aggregate field agreement: 64.2%
-- Strict all-three match: 33.3%
-- Distribution overlap: 81.0%
+## 5. Benchmark lineage
 
-The model was therefore positioned for aggregate support-volume intelligence rather than unattended per-ticket automation.
+| Iteration | Aggregate field agreement | What it taught |
+|---|---:|---|
+| v1 | 67.7% | The model never selected `Other`; one instruction forced the closest named label |
+| v2 | 66.3% | A note rendered into the wrong field produced illegal values and exclusions |
+| v3 | 64.6% | The fixed result remained statistically indistinguishable at the available sample size |
+| Combined format | 64.2% | One response per ticket preserved performance while cutting calls by two-thirds |
 
-## Cost optimization
+The approximate margin of error was ±9 percentage points. By a decision rule agreed in advance,
+prompt-wording iteration stopped. Further improvement would require more gold labels, richer input
+context, a model change, or a hybrid method.
 
-The consolidated format reduced model calls from 2,103 to 701 for the full population. Its benchmark result differed by only 0.4 percentage points from the per-field format.
+## 6. Validated combined-call result
+
+The final combined-call benchmark produced:
+
+- Product area: **75.3%**
+- Feature workflow: **64.5%**
+- Issue type: **52.7%**
+- Aggregate field agreement: **64.2%**
+- Strict all-three match: **33.3%**
+- Distribution overlap: **81.0%**
+- 93 scored rows
+- 4 empty cases dropped
+- 7 flagged rows excluded
+
+## 7. Cost validation before scale
+
+The per-field design required three calls per ticket. The combined format returned all three
+labels in one JSON response.
+
+For 701 tickets:
+
+- Per-field design: 2,103 calls
+- Combined design: 701 calls
+- Reduction: **67%**
+
+The combined format was benchmarked against the same gold sample before it was accepted for the
+full-population run.
+
+## 8. Scale replication
+
+The full-population run classified 701 tickets:
+
+- Approximately **$2** in model usage
+- Zero API failures
+- 33 rows flagged by automatic output checks
+- 10.7% assigned insufficient-information labels, consistent with the sample’s 10–12% rate
+
+That 10.7% result is a consistency check, not human verification of all 701 records.
+
+## 9. Reliability lessons
+
+- **Stage metadata records execution, never intent**
+- **Paid or destructive verification uses fixtures unless explicitly approved**
+- **Cleaning changes are versioned and can invalidate comparability**
+- **Exclusions and failures are counted rather than silently removed**
+- **Known limitations belong in the executive deliverable**
+
+A long-standing text-cleaning bug that removed subject lines was discovered during the project.
+Earlier runs were declared non-comparable instead of being silently mixed with the corrected
+pipeline.
+
+## 10. Interpretation
+
+The system was strongest for:
+
+- Aggregate volume intelligence
+- Product-area classification
+- Selected high-volume categories
+- Taxonomy and reason-code discovery
+
+It was not positioned for unattended per-ticket automation. One important confusion involved
+access requests being interpreted as unexpected behavior. The combined volume of the two
+categories was more dependable than the exact split.

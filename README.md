@@ -1,34 +1,78 @@
 # Support Ticket Intelligence — measured LLM classification case study
 
-Built an AI-assisted support-ticket analysis pipeline that enriched **701 CRM cases** across
-three dimensions:
+Built an AI-assisted pipeline that enriched **701 CRM support cases** across three
+dimensions: **product area, feature workflow, and issue type**.
 
-1. **Product area**
-2. **Feature workflow**
-3. **Issue type**
+Against a **100-ticket human benchmark**, the validated configuration achieved
+**64.2% agreement across individual field decisions**, including **75.3%** on product
+area, plus **81% distribution overlap** with the expert-labeled category mix. A
+one-call-per-ticket JSON format reduced model calls by **67%** while remaining within
+**0.4 percentage points** of the three-call benchmark. The full-population run cost
+approximately **$2** and completed with zero API failures.
 
-A **100-ticket human benchmark** measured **64.2% agreement across individual field decisions**,
-including **75.3%** on product area. The aggregate label mix achieved **81% distribution overlap**
-with the expert-labeled sample.
+The analysis surfaced a transfer-related workload representing roughly **one in six
+analyzable tickets**—a category not visible in the CRM’s existing reason structure—and
+the resulting taxonomy informed a proposal to improve the CRM’s native reason codes.
 
-The project also validated a one-call-per-ticket JSON format that reduced model calls by **67%**
-while preserving benchmark performance within **0.4 percentage points**. The full-population run
-cost approximately **$2** and completed with zero API failures.
+> **Documentation-only portfolio repository.** The private application ran against
+> confidential support data. Production code, customer messages, internal identifiers,
+> and the proprietary taxonomy are not published. This repository contains a sanitized
+> architecture, methodology, synthetic examples, and a runnable implementation of the
+> core evaluation formulas.
 
-> This is a public, sanitized case study. The private application, customer messages, proprietary taxonomy, and employer-specific code are not published.
+## What I personally built
 
-## Repository highlights
+- The **three-dimensional taxonomy and labeling rules**, developed through clustering-assisted
+  discovery and expert review
+- The staged **ingest, cleaning, sampling, human-review, classification, scoring, and reporting**
+  workflow
+- A separate full-population classification path with a **server-side cost gate**
+- The **100-ticket gold benchmark**, manually labeled against written decision rules
+- A versioned taxonomy system with **values, decision rules, synonyms, and preflight validation**
+- The evaluation and provenance layer recording model, prompt version, call mode, taxonomy hash,
+  seed, input mode, cleaning version, and row counts
+- Failure-mode analysis and an executive report translating technical results into operational
+  recommendations
 
-- [`examples/sample_taxonomy.xlsx`](examples/sample_taxonomy.xlsx) — synthetic three-sheet
-  taxonomy with separate product-area, feature-workflow, and issue-type columns
-- [`examples/synthetic_gold.csv`](examples/synthetic_gold.csv) — three human-label columns
-- [`examples/synthetic_predictions.csv`](examples/synthetic_predictions.csv) — three matching
-  LLM prediction columns
-- [`scripts/score_example.py`](scripts/score_example.py) — runnable three-field evaluator
-- [`docs/technical-overview.md`](docs/technical-overview.md) — sanitized technical design
-- [`docs/methodology.md`](docs/methodology.md) — evaluation and interpretation
+## Results
 
-## Three-field schema
+| Question | Verified result |
+|---|---:|
+| Product-area agreement | **75.3%** |
+| Feature-workflow agreement | **64.5%** |
+| Issue-type agreement | **52.7%** |
+| Agreement across all individual field decisions | **64.2%** |
+| Strict all-three-fields match | **33.3%** |
+| Aggregate distribution overlap | **81.0%** |
+| Selected high-volume category recall | **83–96%**, with small reported sample sizes |
+| Full-population model cost | **~$2** |
+| Total measured pilot cost | **$5.19** |
+| Model-call reduction | **67%** |
+| Full-run API failures | **0** |
+
+These metrics answer different questions. Field agreement checks whether the same label was
+assigned to the same field on the same ticket. Strict exact match requires all three labels on
+one ticket to match. Distribution overlap checks whether the overall category mix was similar;
+it is **not** ticket-level accuracy.
+
+## Architecture
+
+![Support Ticket Intelligence architecture](docs/architecture.png)
+
+**Private implementation stack:** Python · FastAPI · HTMX · PostgreSQL · GPT-4o JSON mode ·
+sentence-transformers · HDBSCAN · Microsoft Presidio · openpyxl
+
+The system used two separate paths:
+
+```text
+Benchmark: ingest → sample → human labels → validate → classify → score → report
+Bulk:      ingest → cost confirmation → classify all → enriched CSV → distribution report
+```
+
+The benchmark path measured model output against human labels. The bulk path classified the full
+population but did not claim human-verified accuracy for all 701 records.
+
+## Three-field contract
 
 | Human benchmark field | Model prediction field |
 |---|---|
@@ -36,70 +80,90 @@ cost approximately **$2** and completed with zero API failures.
 | `human_feature_workflow_l1` | `llm_feature_workflow` |
 | `issue_type` | `llm_issue_type` |
 
-## Verified private-project results
+The public synthetic files preserve this same three-field structure.
 
-| Metric | Result |
-|---|---:|
-| Product-area agreement | **75.3%** |
-| Feature-workflow agreement | **64.5%** |
-| Issue-type agreement | **52.7%** |
-| Aggregate field agreement | **64.2%** |
-| Strict all-three exact match | **33.3%** |
-| Aggregate distribution overlap | **81.0%** |
-| Full-population model cost | **~$2** |
-| Model-call reduction | **67%** |
+## The measurement story
 
-These figures answer different questions. Aggregate field agreement checks individual label
-decisions. Strict exact match requires all three fields on the same ticket to be correct.
-Distribution overlap checks whether the overall category mix was similar.
+- **v1 — 67.7%:** the model never selected `Other`. Root cause: one instruction required the
+  closest named category.
+- **v2 — 66.3%:** an incorrectly scoped prompt note generated illegal values; counted exclusions
+  made the regression visible.
+- **v3 — 64.6%:** after the fixes, the measured iterations remained statistically
+  indistinguishable at the available sample size.
+- **Combined format — 64.2%:** one JSON response per ticket reduced calls by two-thirds while
+  preserving measured performance.
+- **Decision:** stop prompt-wording iteration. Further improvement requires more gold labels,
+  different input context, a model change, or a hybrid approach.
+
+Full details: [docs/methodology.md](docs/methodology.md)
 
 ## Run the synthetic evaluator
 
+No third-party packages are required.
+
 ```bash
-python scripts/score_example.py
+python3 scripts/score_example.py
 ```
 
-The script reads the three-column gold and prediction files and reports metrics for all three
-classification fields.
+The script evaluates all three fields and reports:
 
-## Conceptual architecture
+- Per-field exact-match accuracy
+- Aggregate field accuracy
+- Strict all-three-fields exact match
+- Distribution overlap
 
-```mermaid
-flowchart LR
-    A[Raw CRM export] --> B[Ingest and cleaning]
-    B --> C[(Run and case store)]
-    C --> D[Seeded sample]
-    D --> E[Human labels]
-    E --> F[Validate and gold]
-    F --> G[Three-field classification]
-    G --> H[Score and benchmark]
+The synthetic examples are intentionally illustrative. The verified private-project metrics are
+recorded separately in `examples/example_benchmark_report.txt`.
 
-    C --> I[Cost confirmation]
-    I --> J[Bulk three-field classification]
-    J --> K[Enriched CSV and distribution report]
+## Repository contents
 
-    T[Versioned taxonomy<br/>3 field columns<br/>decision rules<br/>synonyms] --> G
-    T --> J
+```text
+README.md
+LICENSE
+docs/
+  architecture.png
+  methodology.md
+  technical-overview.md
+examples/
+  sample_taxonomy.xlsx
+  sample_taxonomy.csv
+  synthetic_tickets.jsonl
+  synthetic_gold.csv
+  synthetic_predictions.csv
+  example_benchmark_report.txt
+scripts/
+  score_example.py
 ```
 
-## What the project demonstrated
+## Key findings
 
-- A broad CRM reason structure hid operationally meaningful workflow demand
-- A governed taxonomy and benchmark made model behavior measurable
-- Aggregate support-volume analysis was useful before ticket-level automation was reliable
-- One-call combined classification reduced cost without a measurable benchmark loss
-- The analysis informed a simpler operational recommendation: improve native CRM reason codes
+- One broad CRM reason contained multiple distinct workflows, including transfers, password
+  resets, activations, and permission grants
+- Staff and login/access work accounted for **337 of 701 predicted labels (48%)**
+- The model assigned **10.7%** of the full population to insufficient-information categories,
+  consistent with the 10–12% rate observed in the expert sample
+- `Other` remained a meaningful long-tail category rather than a modeling defect
+- The system was useful for aggregate support-volume intelligence before it was reliable enough
+  for unattended per-ticket automation
+- The most durable operational output may be the improved native CRM reason structure rather than
+  an always-on LLM service
 
-## What it did not demonstrate
+## Limitations and decisions
 
-- Fully automated routing
-- Human verification of all 701 predictions
-- Perfect PII removal
-- Organization-wide production deployment or adoption
+- The benchmark used the **first customer email only**, so later diagnostic and resolution context
+  was intentionally excluded
+- The 701-record population was model-classified, not manually verified
+- PII scrubbing was applied at ingest, but no claim of perfect removal is made
+- One documented confusion involved access requests being read as unexpected behavior
+- The private system was a production-style prototype, not an organization-wide deployed service
+- Public examples are synthetic and do not reproduce the private taxonomy or ticket corpus
 
-## Transparent AI usage
+## Disclaimer
 
-AI tools were used to support drafting, structuring, and polishing this public case study. The
-analysis, metric interpretation, sanitation choices, and final review remained human-directed.
+This repository is a public portfolio case study created from a private internal project. It
+contains synthetic data, simplified examples, and genericized documentation only. No customer
+data, employee data, credentials, internal case identifiers, proprietary source code, or
+confidential company information is included.
 
-All example records and labels in this repository are synthetic.
+AI tools supported drafting, structuring, and polishing this public case study. The analysis,
+metric interpretation, sanitation choices, and final review remained human-directed.

@@ -1,27 +1,42 @@
-======================================================
-SANITIZED THREE-FIELD BENCHMARK EXAMPLE
-======================================================
+══════════════════════════════════════════════════════
+PROVENANCE  (sanitized example using verified project metrics)
+══════════════════════════════════════════════════════
+  run_id                       <genericized>
+  model                        gpt-4o
+  call_mode                    combined
+  prompt_version               v4-combined
+  taxonomy_filename            <private versioned taxonomy>
+  taxonomy_sha256              <recorded in private run>
+  gold_case_count              100
+  scored_case_count            93
+  empty_cases_dropped          4   (no parseable customer content)
+  flagged_excluded             7   (counted, never silent)
+  input_mode                   first_email_only
+  cleaning_version             v2.1
+  sample_seed                  42
 
-Fields scored:
-  product_area
-  feature_workflow
-  issue_type
+PRIMARY: FIELD AND ROW AGREEMENT
+  product_area_accuracy            75.3%   (70 / 93)
+  feature_workflow_accuracy        64.5%   (60 / 93)
+  issue_type_accuracy              52.7%   (49 / 93)
+  total_field_accuracy             64.2%   (179 / 279 field decisions)
+  strict_exact_match_all_3         33.3%   (31 / 93 tickets)
 
-Human/model mapping:
-  human_product_area_l1     ↔ llm_product_area
-  human_feature_workflow_l1 ↔ llm_feature_workflow
-  issue_type                ↔ llm_issue_type
+SECONDARY: DISTRIBUTION OVERLAP
+  product_area_overlap             87.1%
+  feature_workflow_overlap         78.5%
+  issue_type_overlap               77.4%
+  total_distribution_overlap       81.0%   (226 / 279 labels)
 
-PRIVATE RUN RESULTS
-  product_area_accuracy          75.3%
-  feature_workflow_accuracy      64.5%
-  issue_type_accuracy            52.7%
-  aggregate_field_accuracy       64.2%
-  strict_exact_match_all_3       33.3%
-  distribution_overlap           81.0%
+INTERPRETATION
+  Field agreement checks whether the same label was assigned to the same field
+  on the same ticket.
 
-Interpretation:
-  Field accuracy measures individual decisions across all three columns.
-  Strict exact match requires all three columns on a ticket to match.
-  Distribution overlap compares the overall category mix and is not
-  ticket-level accuracy.
+  Strict exact match requires all three fields on one ticket to match.
+
+  Distribution overlap checks whether the overall category mix is similar. It
+  does not establish ticket-level correctness.
+
+POSITIONING
+  Useful for aggregate support-volume intelligence and selected high-volume
+  categories; not positioned for unattended per-ticket automation.
