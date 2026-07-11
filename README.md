@@ -97,4 +97,9 @@ flowchart LR
 - Perfect PII removal
 - Organization-wide production deployment or adoption
 
+## Transparent AI usage
+
+AI tools were used to support drafting, structuring, and polishing this public case study. The
+analysis, metric interpretation, sanitation choices, and final review remained human-directed.
+
 All example records and labels in this repository are synthetic.
